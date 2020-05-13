@@ -93,7 +93,8 @@ func (this *BST) Delete(v interface{}) bool {
 			fromRight = false
 		}
 		if fromRight {
-			pq.right = nil
+			//pq.right = nil
+			pq.right = p.right
 		} else {
 			pq.left = nil
 		}
@@ -103,9 +104,11 @@ func (this *BST) Delete(v interface{}) bool {
 			this.root = q
 		} else {
 			if deleteLeft {
-				pq.left = q
+				//pq.left = q
+				pp.left = q
 			} else {
-				pq.right = q
+				//pq.right = q
+				pp.right = q
 			}
 		}
 	} else { //删除的是一个只有左孩子的节点
