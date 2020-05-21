@@ -143,3 +143,26 @@ func TestBST_DeleteG(t *testing.T) {
 	t.Log(bst.Delete(1))
 	bst.InOrderTraverse()
 }
+
+func TestBST_DeleteH(t *testing.T) {
+	bst := NewBST(33, compareFunc)
+
+	bst.Insert(16)
+	bst.Insert(50)
+	bst.Insert(13)
+	bst.Insert(18)
+	bst.Insert(34)
+	bst.Insert(58)
+	bst.Insert(15)
+	bst.Insert(17)
+	bst.Insert(25)
+	bst.Insert(51)
+	bst.Insert(66)
+	bst.Insert(19)
+	bst.Insert(27)
+	bst.Insert(55)
+
+	t.Log(bst.Delete(18))
+	bst.InOrderTraverse()
+
+}
