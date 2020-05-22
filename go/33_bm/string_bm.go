@@ -137,4 +137,30 @@ func main() {
 	pattern := "cabcab"
 
 	fmt.Println(bmSearch(main, pattern))
+
+	main = "abcacabcbcbacabc"
+	pattern = "cabcab"
+
+	fmt.Println(bmSearch(main, pattern))
+
+	main = "hello"
+	pattern = "ll"
+
+	fmt.Println(bmSearch(main, pattern))
+
+	main = "aabbbbaaabbababbabbbabaaabb"
+	pattern = "ababacd"
+
+	fmt.Println(bmSearch(main, pattern))
+
+	main = "aabbbbaaabbababbabbbabaaabb"
+	pattern = "abab"
+
+	fmt.Println(bmSearch(main, pattern))
+
+	main = "abc abcdab abcdabcdabde"
+	pattern = "bcdabd"
+
+	fmt.Println(bmSearch(main, pattern))
+
 }
