@@ -53,10 +53,9 @@ func leastCoins(targetTotal int, coinOptions, memo []int) int {
 			continue
 		}
 		cNum := 1 + leastCoins(targetTotal-coin, coinOptions, memo)
-		if cMinNum == -1 || cNum < cMinNum {
+		if cNum != 0 && (cMinNum == -1 || cNum < cMinNum) {
 			cMinNum = cNum
 		}
-
 	}
 	memo[targetTotal-1] = cMinNum
 	return cMinNum

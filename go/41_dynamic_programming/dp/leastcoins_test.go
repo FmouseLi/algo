@@ -26,6 +26,18 @@ func TestFindLeastCoins(t *testing.T) {
 	}
 	t.Logf("cnt===%d", Cnt)
 
+	coinOptions = []int{186, 419, 83, 408}
+
+	Cnt = 0
+	t.Log("test 3 =====================")
+	result = LeastCoins(6249, coinOptions)
+
+	if result != 20 {
+		t.Logf("least coins %d", result)
+		t.Error("failed")
+	}
+	t.Logf("cnt===%d", Cnt)
+
 }
 
 func TestFindLeastCoins2(t *testing.T) {
