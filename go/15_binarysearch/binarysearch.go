@@ -100,7 +100,7 @@ func BinarySearchLast(a []int, v int) int {
 	return -1
 }
 
-//查找第一个大于等于给定值的元素
+//查找第一个大于给定值的元素
 func BinarySearchFirstGT(a []int, v int) int {
 	n := len(a)
 	if n == 0 {
@@ -112,12 +112,60 @@ func BinarySearchFirstGT(a []int, v int) int {
 	for low <= high {
 		mid := (high + low) >> 1
 		if a[mid] > v {
-			high = mid - 1
-		} else if a[mid] < v {
-			low = mid + 1
+			if mid == 0 || a[mid-1] <= v {
+				return mid
+			} else {
+				high = mid - 1
+			}
 		} else {
-			if mid != n-1 && a[mid+1] > v {
-				return mid + 1
+			low = mid + 1
+		}
+	}
+
+	return -1
+}
+
+//查找第一个大于等于给定值的元素
+func BinarySearchFirstGTE(a []int, v int) int {
+	n := len(a)
+	if n == 0 {
+		return -1
+	}
+
+	low := 0
+	high := n - 1
+	for low <= high {
+		mid := (high + low) >> 1
+		if a[mid] >= v {
+			if mid == 0 || a[mid-1] < v {
+				return mid
+			} else {
+				high = mid - 1
+			}
+		} else {
+			low = mid + 1
+		}
+	}
+
+	return -1
+}
+
+//查找最后一个小于给定值的元素
+func BinarySearchLastLT(a []int, v int) int {
+	n := len(a)
+	if n == 0 {
+		return -1
+	}
+
+	low := 0
+	high := n - 1
+	for low <= high {
+		mid := (low + high) >> 1
+		if a[mid] >= v {
+			high = mid - 1
+		} else {
+			if mid == n-1 || a[mid+1] >= v {
+				return mid
 			} else {
 				low = mid + 1
 			}
@@ -128,7 +176,7 @@ func BinarySearchFirstGT(a []int, v int) int {
 }
 
 //查找最后一个小于等于给定值的元素
-func BinarySearchLastLT(a []int, v int) int {
+func BinarySearchLastLTE(a []int, v int) int {
 	n := len(a)
 	if n == 0 {
 		return -1
@@ -140,13 +188,11 @@ func BinarySearchLastLT(a []int, v int) int {
 		mid := (low + high) >> 1
 		if a[mid] > v {
 			high = mid - 1
-		} else if a[mid] < v {
-			low = mid + 1
 		} else {
-			if mid == 0 || a[mid-1] < v {
-				return mid - 1
+			if mid == n-1 || a[mid+1] > v {
+				return mid
 			} else {
-				high = mid - 1
+				low = mid + 1
 			}
 		}
 	}
