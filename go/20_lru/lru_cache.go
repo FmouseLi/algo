@@ -71,11 +71,13 @@ func (this *LRUCache) addNode(key int, value int) {
 		value: value,
 	}
 
+	//处理哈希冲突链
 	tmp := &this.node[hash(key)]
 	newNode.hnext = tmp.hnext
 	tmp.hnext = newNode
 	this.used++
 
+	//添加到LRU双向链表尾部
 	if this.tail == nil {
 		this.tail, this.head = newNode, newNode
 		return
@@ -89,9 +91,11 @@ func (this *LRUCache) delNode() {
 	if this.head == nil {
 		return
 	}
-	prev := &this.node[hash(this.head.key)]
-	tmp := prev.hnext
 
+	prev := &this.node[hash(this.head.key)]
+
+	//查找冲突链中的位置并删除
+	tmp := prev.hnext
 	for tmp != nil && tmp.key != this.head.key {
 		prev = tmp
 		tmp = tmp.hnext
@@ -100,6 +104,8 @@ func (this *LRUCache) delNode() {
 		return
 	}
 	prev.hnext = tmp.hnext
+
+	//LRU的双向链表的节点删除
 	this.head = this.head.next
 	this.head.prev = nil
 	this.used--
@@ -122,6 +128,7 @@ func (this *LRUCache) searchNode(key int) *lruNode {
 }
 
 func (this *LRUCache) moveToTail(node *lruNode) {
+	//从原来位置删除
 	if this.tail == node {
 		return
 	}
@@ -133,6 +140,7 @@ func (this *LRUCache) moveToTail(node *lruNode) {
 		node.prev.next = node.next
 	}
 
+	//添加到尾部
 	node.next = nil
 	this.tail.next = node
 	node.prev = this.tail
