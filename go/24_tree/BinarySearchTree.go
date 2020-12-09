@@ -93,23 +93,26 @@ func (this *BST) Delete(v interface{}) bool {
 			fromRight = false
 		}
 		if fromRight {
-			//pq.right = nil
 			pq.right = p.right
 		} else {
 			pq.left = nil
 		}
 
+		//q替换p的两个步骤
+		//1.q接管p的子节点
+		//2.p的父节点pp原指向p的现在要指向q
+
+		//q接管p的子节点
 		q.left = p.left
 		q.right = p.right
 
+		//p的父节点pp原指向p的现在要指向q
 		if nil == pp { //根节点被删除
 			this.root = q
 		} else {
 			if deleteLeft {
-				//pq.left = q
 				pp.left = q
 			} else {
-				//pq.right = q
 				pp.right = q
 			}
 		}
